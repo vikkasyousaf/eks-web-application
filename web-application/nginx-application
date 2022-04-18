@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nginx-application
-        image: engineerflaconi/nginx-application:0.2
+        image: <USERNAME>/nginx-application:0.2
         ports:
         - containerPort: 8081
 ---
