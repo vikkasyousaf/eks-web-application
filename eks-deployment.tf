@@ -1,31 +1,34 @@
-resource "kubernetes_deployment" "nginxdemos" {
+resource "kubernetes_deployment" "nginx-application" {
   metadata {
-    name = "terraform"
+    name = "nginx-application-deployment"
     labels = {
-      test = "nginxdemos"
+      app = "nginx-application"
     }
   }
 
   spec {
-    replicas = 2
+    replicas = 1
 
     selector {
       match_labels = {
-        test = "nginxdemos"
+        app = "nginx-application"
       }
     }
 
     template {
       metadata {
         labels = {
-          test = "nginxdemos"
+          app = "nginx-application"
         }
       }
 
       spec {
         container {
-          image = "nginxdemos/hello:0.3"
-          name  = "nginxdemos"
+          image = "engineerflaconi/nginx-application:0.2"
+          name  = "nginx-application"
+          port {
+            container_port = 8081
+          }
 
           resources {
             limits {

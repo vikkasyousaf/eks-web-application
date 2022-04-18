@@ -1,16 +1,16 @@
 resource "kubernetes_service" "nginxdemos" {
   metadata {
-    name = "terraform"
+    name = "nginx-application-svc"
   }
   spec {
     selector = {
-      test = "nginxdemos"
+      app = "nginx-application"
     }
     port {
       port        = 80
-      target_port = 80
+      target_port = 8081
+      protocol    = TCP
     }
-
     type = "LoadBalancer"
   }
 }
