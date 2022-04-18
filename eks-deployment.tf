@@ -24,7 +24,7 @@ resource "kubernetes_deployment" "nginx-application" {
 
       spec {
         container {
-          image = "engineerflaconi/nginx-application:0.2"
+          image = "<USERNAME>/nginx-application:0.2"
           name  = "nginx-application"
           port {
             container_port = 8081
