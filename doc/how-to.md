@@ -96,3 +96,10 @@ This is a very basic eks cluster. In order to make it production ready cluster, 
 * The module allow us to enable logging so that the logs are available on cloudwatch.
 * Beside this there a lot of logs shipper which could be use to ship logs e.g using logstash/filebeat to ship logs to elasticsearch cluster.
 * For metric it also depend on to tool which tool we will use to monitoring the cluster. e.g cloudwatch, promethous, elasticsearch etc.
+
+Notes:
+* This project will also deploy the web application using terraform, beside this i have also add the [yaml](https://github.com/vikkasyousaf/eks-web-application/blob/main/web-application/nginx-application) file if you want to deploy the web-application manually.
+* Once thre cluster is up and running, you can use the following command to deploy the application:
+```
+kubectl apply -f nginx-application
+```
