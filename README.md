@@ -1,5 +1,5 @@
 ### EKS Cluster Demo
-This project will create an eks cluster and will deployment a simple web application. For more details refer to this [doc].
+This project will create an eks cluster and will deployment a simple web application. For more details refer to this [doc](https://github.com/vikkasyousaf/eks-web-application/blob/main/doc/how-to.md).
 
 ## Requirements
 
