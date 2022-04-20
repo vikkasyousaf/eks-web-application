@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nginx-application
-        image: cloudcomputing17/nginx-application::0.3
+        image: cloudcomputing17/nginx-application::0.4
         ports:
         - containerPort: 8080
 ---
