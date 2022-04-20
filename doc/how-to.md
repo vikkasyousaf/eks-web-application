@@ -76,6 +76,8 @@ NAME                TYPE           CLUSTER-IP       EXTERNAL-IP                 
 kubernetes          ClusterIP      172.20.0.1       <none>                                                                       443/TCP        60m
 nginx-application   LoadBalancer   172.20.214.116   a8c37c98dfffd4b17a67a5248b9df6e0-1665262233.eu-central-1.elb.amazonaws.com   80:31883/TCP   26m
 ```
+### Demo
+![](https://github.com/vikkasyousaf/eks-web-application/blob/main/doc/demo.png)
 
 ### TODO
 This is a very basic eks cluster. In order to make it production ready cluster, we will need to make the following adjustments:
