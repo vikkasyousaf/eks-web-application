@@ -14,7 +14,7 @@ For the give project i have create the following Resources:
 
 ## How to rollout
 For this project we are using terraform version `1.1`.
-
+Before running the project make sure to add `account_id` of you aws account in `variable.tf` and the iam user in `map_users`.
 ### Testing Instructions
 ```
 terraform init
@@ -37,24 +37,24 @@ kubectl config use-context arn:aws:eks:eu-central-1:<account_id>:cluster/terrafo
 ```
 kubectl get nodes
 NAME                                         STATUS   ROLES    AGE     VERSION
-ip-10-0-1-85.eu-central-1.compute.internal   Ready    <none>   7m46s   v1.21.5-eks-9017834
+ip-10-0-1-70.eu-central-1.compute.internal   Ready    <none>   26m   v1.21.5-eks-9017834
 ```
 ```
 kubectl get ns
 NAME              STATUS   AGE
-default           Active   16m
-kube-node-lease   Active   16m
-kube-public       Active   16m
-kube-system       Active   16m
+default           Active   31m
+kube-node-lease   Active   31m
+kube-public       Active   31m
+kube-system       Active   31m
 ```
 ```
 kubectl get pods -n default
-NAME                         READY   STATUS    RESTARTS   AGE
-terraform-868899bf59-dkr9q   1/1     Running   0          10m
-terraform-868899bf59-lbrk4   1/1     Running   0          10m
+NAME                                            READY   STATUS    RESTARTS   AGE
+nginx-application-deployment-7d95dd8998-hfj6w   1/1     Running   0          2m14s
+nginx-application-deployment-7d95dd8998-k9blk   1/1     Running   0          2m14s
 ```
 ```
-kubectl logs -f terraform-868899bf59-dkr9q  -n default
+kubectl logs -f nginx-application-fbc884985-pt2lp  -n default
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -62,15 +62,21 @@ kubectl logs -f terraform-868899bf59-dkr9q  -n default
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 /docker-entrypoint.sh: Configuration complete; ready for start up
-2022/04/17 09:42:45 [notice] 1#1: using the "epoll" event method
-2022/04/17 09:42:45 [notice] 1#1: nginx/1.21.6
-2022/04/17 09:42:45 [notice] 1#1: built by gcc 10.3.1 20211027 (Alpine 10.3.1_git20211027)
-2022/04/17 09:42:45 [notice] 1#1: OS: Linux 5.4.181-99.354.amzn2.x86_64
-2022/04/17 09:42:45 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2022/04/17 09:42:45 [notice] 1#1: start worker processes
-2022/04/17 09:42:45 [notice] 1#1: start worker process 22
-10.0.1.85 - - [17/Apr/2022:09:50:33 +0000] "GET / HTTP/1.0" 200 7232 "-" "-" "-"
+2022/04/20 11:09:57 [notice] 1#1: using the "epoll" event method
+2022/04/20 11:09:57 [notice] 1#1: nginx/1.21.6
+2022/04/20 11:09:57 [notice] 1#1: built by gcc 10.3.1 20211027 (Alpine 10.3.1_git20211027)
+2022/04/20 11:09:57 [notice] 1#1: OS: Linux 5.4.181-99.354.amzn2.x86_64
+2022/04/20 11:09:57 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/04/20 11:09:57 [notice] 1#1: start worker processes
+2022/04/20 11:09:57 [notice] 1#1: start worker process 22
 ```
+```
+kubectl get svc
+NAME                TYPE           CLUSTER-IP       EXTERNAL-IP                                                                  PORT(S)        AGE
+kubernetes          ClusterIP      172.20.0.1       <none>                                                                       443/TCP        60m
+nginx-application   LoadBalancer   172.20.214.116   a8c37c98dfffd4b17a67a5248b9df6e0-1665262233.eu-central-1.elb.amazonaws.com   80:31883/TCP   26m
+```
+
 ### TODO
 This is a very basic eks cluster. In order to make it production ready cluster, we will need to make the following adjustments:
 * Create and add ssh key to the nodes to access the node for maintanace and troubleshooting

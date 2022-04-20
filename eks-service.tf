@@ -1,6 +1,6 @@
 resource "kubernetes_service" "nginxdemos" {
   metadata {
-    name = "nginx-application-svc"
+    name = "nginx-application"
   }
   spec {
     selector = {
@@ -8,8 +8,7 @@ resource "kubernetes_service" "nginxdemos" {
     }
     port {
       port        = 80
-      target_port = 8081
-      protocol    = TCP
+      target_port = 8080
     }
     type = "LoadBalancer"
   }

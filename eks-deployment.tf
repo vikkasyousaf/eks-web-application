@@ -7,7 +7,7 @@ resource "kubernetes_deployment" "nginx-application" {
   }
 
   spec {
-    replicas = 1
+    replicas = 2
 
     selector {
       match_labels = {
@@ -24,10 +24,10 @@ resource "kubernetes_deployment" "nginx-application" {
 
       spec {
         container {
-          image = "<USERNAME>/nginx-application:0.2"
+          image = "cloudcomputing17/nginx-application:0.4"
           name  = "nginx-application"
           port {
-            container_port = 8081
+            container_port = 8080
           }
 
           resources {
